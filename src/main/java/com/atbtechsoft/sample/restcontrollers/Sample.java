@@ -49,7 +49,7 @@ public class Sample {
         }
 	}
 	
-	@RequestMapping(value = "search/{key}/{keyword}", method = RequestMethod.GET)	
+	@RequestMapping(value = "/search/{key}/{keyword}", method = RequestMethod.GET)	
     public ResponseEntity<?> search(@PathVariable String key, @PathVariable String keyword){		
 		try {
 			return new ResponseEntity<>(implementationService.findBySearch(key,keyword), HttpStatus.OK);
@@ -60,24 +60,11 @@ public class Sample {
 	}
 	
 	
-	@RequestMapping(value = "delete/{id}/", method = RequestMethod.DELETE)	
-    public ResponseEntity<?> deleteClientProfile(@PathVariable int id){
+	@RequestMapping(value = "/{data}", method = RequestMethod.DELETE)	
+    public ResponseEntity<?> deleteClientProfile(@PathVariable String data){
 		
 		try {
-			//int retValue = creditProfileService.deleteCreditProfile(id);
-			Response response = new Response();
-			/*
-			if(retValue == 1) {
-				response.setStatus("SUCCESS");
-				response.setMessage("Deleted Credit Profile Successfully");
-				return new ResponseEntity<>(response, HttpStatus.OK);
-			}else {
-				response.setStatus("FAILURE");
-				response.setMessage("Deleting Credit Profile Failed");
-				return new ResponseEntity<>(response, HttpStatus.NOT_IMPLEMENTED);
-			}
-			*/
-			return new ResponseEntity<>(response, HttpStatus.NOT_IMPLEMENTED);
+			return new ResponseEntity<>(implementationService.delete(data), HttpStatus.NOT_IMPLEMENTED);
 		} catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

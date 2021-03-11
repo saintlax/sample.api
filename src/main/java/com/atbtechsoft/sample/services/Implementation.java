@@ -71,6 +71,46 @@ public class Implementation {
 		return response;		
 	}
 	
+	public Response deleteById(int id) {
+		data.remove(id);
+		Response response = new Response();
+		response.setError("");
+		response.setStatusCode(200);
+		return response;
+	}
+	
+	public Response deleteByQuery(String query) {
+		
+		Response response = new Response();
+		response.setError("");
+		response.setStatusCode(200);
+		return response;
+	}
+	
+	public Response delete(String query) {
+		
+		try {
+			if(utilities.isNumeric(query)) {
+				return deleteById(Integer.parseInt(query));
+			}else {
+				QueryData queryData = utilities.sortPayload(query);
+				if(queryData.getType() == utilities.IN) {
+					//i don taya
+				}
+				if(queryData.getType() == utilities.NOT) {
+					//i don taya
+				}
+				if(queryData.getType() == utilities.RANGE) {
+					//i don taya
+				}
+				return deleteByQuery(query);
+			}			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return new Response();
+		}
+	}
+	
 	public Response get(String query) {
 		try {
 			if(utilities.isNumeric(query)) {
