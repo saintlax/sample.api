@@ -64,7 +64,7 @@ public class Sample {
     public ResponseEntity<?> deleteClientProfile(@PathVariable String data){
 		
 		try {
-			return new ResponseEntity<>(implementationService.delete(data), HttpStatus.NOT_IMPLEMENTED);
+			return new ResponseEntity<>(implementationService.delete(data), HttpStatus.OK);
 		} catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
